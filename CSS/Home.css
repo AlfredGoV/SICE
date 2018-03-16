@@ -1,0 +1,70 @@
+HTML {height:100%;}
+
+
+body
+{
+background: #FFFFFF;/*url(../images/fondo-principal.jpg) repeat-x ;*//*scroll 50% 0pt*/;
+font-family:arial,helvetica,clean,sans-serif;
+font-size:13px;
+text-align: center;
+margin:0pt;
+padding:0pt;
+width:100%
+}
+
+#contenido {
+background:#FFFFFF none repeat scroll 0%;
+border-color: #FFFFFF rgb(255, 255, 255);
+border-style:none solid solid;
+border-width:medium 1px 1px;
+margin:0pt auto;
+/*position:relative;*/
+width:790px;
+padding-bottom:100px;
+height:650px;
+/*background-position: center;*/
+text-align:center;
+}
+
+#cabecera1 {
+    background: #FFFFFF url(../Pics/Header1.png) no-repeat scroll 0%;
+    height: 100;
+    width: 500;
+    margin-bottom: 0px;
+}
+#cabecera2 {
+    background: #FFFFFF url(../Pics/Header.png) no-repeat scroll 0%;
+    height: 240px;
+    width: 785px;
+    margin-bottom: 0px;
+}
+
+DIV LABEL { PADDING-RIGHT: 25px; DISPLAY: block; PADDING-LEFT: 5px; FLOAT: left; PADDING-BOTTOM: 3px; MARGIN: 35px 30px -220px 30px; WIDTH: 150px; PADDING-TOP: 3px; FONT-FAMILY: verdana; TEXT-ALIGN: right }
+fieldset.login {width:500px; }
+	
+fieldset{border: 0px solid #000000; text-align:left; margin: 0px auto 5px auto }
+fieldset label{width:170px; display: block; float:left; margin-left:0px;}
+fieldset select{width:450px; display: block; float:left; margin-bottom:5px;}
+fieldset br{clear:left}
+fieldset div{clear:left; margin-bottom:5px}
+fieldset input {margin-top:30px; margin-left:205px; margin-bottom:-24px;   width:100px; height:23px;}
+
+	#contenido FIELDSET INPUT { HEIGHT: 23px;}
+	#contenido FIELDSET { BORDER-RIGHT: #000000 0px solid; PADDING-RIGHT: 0px; PADDING-LEFT: auto; PADDING-BOTTOM: 20px; MARGIN: 20px 145px 10px 120px; BORDER-LEFT: #000000 0px solid; PADDING-TOP: 40px; BORDER-BOTTOM: #000000 0px solid; TEXT-ALIGN: left }
+	#contenido FIELDSET LEGEND { PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; MARGIN: 0pt; COLOR: #660066; PADDING-TOP: 0px }
+	#contenido FIELDSET DIV { CLEAR: left; PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px }
+	#contenido FIELDSET P A{ margin: 5px 225px auto 225px}
+
+.boton
+{
+    /*background: url(../images/background-naranja.jpg) ;*/
+    BACKGROUND-COLOR: grey;
+    WIDTH: 80;
+    HEIGHT: 25px;
+    COLOR: white;
+    CURSOR: hand;
+    font-size:12px;
+   
+}
+	
+	

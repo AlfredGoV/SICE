@@ -1,0 +1,106 @@
+
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>principal</title>
+<LINK href="Css/Home.css" type="text/css" rel="stylesheet">
+</head>
+
+<body  bgcolor="#ffffff" link="#000080" vlink="#000080" alink="#000080" topmargin="0" leftmargin="0">
+
+
+<form id="frmEntrada" action method="post">
+			<div id="contenido">
+				<fieldset class="login" >
+                    <div id="cabecera1"></div>
+					<div><LABEL>Usuario:</LABEL></div>
+					<div><input id="login" name="T1" type="text" maxlength="50" name="login" ></div>
+					
+					<div><label>Contraseña:</label></div>
+					<div><input id="password" name="T2" type="password" maxlength="50" name="password"></div>
+
+                    <input id="btnEntrar" type="button" value="Entrar" onClick="entrada()" name="btnEntrar" class="boton">	 			
+
+                    <div id="cabecera2"></div>
+
+				</fieldset>
+				
+			
+
+      </div>
+			
+
+</form>
+<script LANGUAGE="javascript">
+function FrontPage_Form1_Validator(theForm)
+{
+
+  if (theForm.T1.value == "")
+  {
+    alert("Please enter a value for the \"T1\" field.");
+    theForm.T1.focus();
+    return (false);
+  }
+
+  if (theForm.T1.value.length < 7)
+  {
+    alert("Please enter at least 7 characters in the \"T1\" field.");
+    theForm.T1.focus();
+    return (false);
+  }
+
+  if (theForm.T1.value.length > 30) 
+  {
+    alert("Please enter at most 30 characters in the \"T1\" field.");
+    theForm.T1.focus();
+    return (false);
+  }
+
+  if (theForm.T2.value == "")
+  {
+    alert("Please enter a value for the \"T2\" field.");
+    theForm.T2.focus();
+    return (false);
+  }
+
+  if (theForm.T2.value.length < 7)
+  {
+    alert("Please enter at least 7 characters in the \"T2\" field.");
+    theForm.T2.focus();
+    return (false);
+  }
+
+  if (theForm.T2.value.length > 30)
+  {
+    alert("Please enter at most 30 characters in the \"T2\" field.");
+    theForm.T2.focus();
+    return (false);
+  }
+  return (true);
+}
+
+function entrada()
+{
+
+    top.location.href = "Default.aspx"
+
+}	
+
+document.all.T1.focus()
+
+/*document.onkeypress = function()
+{
+	var tecla;
+	tecla = (document.all) ? event.keyCode : event.which;
+	if(tecla == 13)
+	{document.getElementById('btnEntrar').onclick()}
+}*/
+
+</script>
+
+</body>
+</html>

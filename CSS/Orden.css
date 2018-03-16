@@ -1,0 +1,50 @@
+    #OR {
+	
+	 position:absolute;
+     z-index:1;
+   
+	}
+	
+	#capa2{
+    position:absolute;
+    z-index:0;
+    top:150px;
+    left:100px;
+    }
+    
+    .boton
+    {
+        
+        BACKGROUND:url(../images/background-botonn.jpg) repeat-x;
+        FONT-FAMILY:"FS ALBERT", VERDANA, ARIAL;
+        FONT-SIZE: 11px;
+        FONT-WEIGHT: normal;
+        
+        WIDTH: 100px;
+        HEIGHT: 22px;
+        
+        COLOR:#7b7b7b;
+        CURSOR: hand;
+        
+        border-bottom-color:#fcb034;
+       
+        border-top-color:#fcb034;
+        border-right-color:#fcb034;
+        border-left-color:#fcb034
+    }
+    
+	.Texto
+	{
+	    FONT-SIZE: .5em;
+	    
+	}
+	.Titulo
+	{
+	    FONT-SIZE: .8em;
+	    
+	}
+	.Titulo2
+	{
+	    FONT-SIZE: .9em;
+	    
+	}

@@ -59,6 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tc_UsuarioSucursal.sql" />
@@ -70,5 +71,14 @@
     <Build Include="dbo\Tables\tc_Ciudad.sql" />
     <Build Include="dbo\Tables\tbcm_estado.sql" />
     <Build Include="dbo\Tables\tbcm_Ciudad.sql" />
+    <Build Include="dbo\Tables\tc_UsrFirmadosH.sql" />
+    <Build Include="dbo\Tables\tc_UsrFirmados.sql" />
+    <Build Include="dbo\Tables\tc_ParametrosGlobales.sql" />
+    <Build Include="dbo\Tables\tc_parametros.sql" />
+    <Build Include="dbo\Tables\tc_OtrosParametrosFD.sql" />
+    <Build Include="dbo\Tables\tc_noacceso.sql" />
+    <Build Include="dbo\Tables\tc_HoraUsua.sql" />
+    <Build Include="dbo\Stored Procedures\SPc_ValidaUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\SPc_EncriptaPassword.sql" />
   </ItemGroup>
 </Project>

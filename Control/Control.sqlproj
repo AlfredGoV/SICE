@@ -74,9 +74,9 @@
     <Build Include="dbo\Tables\tc_UsrFirmadosH.sql" />
     <Build Include="dbo\Tables\tc_UsrFirmados.sql" />
     <Build Include="dbo\Tables\tc_ParametrosGlobales.sql" />
-    <Build Include="dbo\Tables\tc_parametros.sql" />
+    <Build Include="dbo\Tables\tc_Parametros.sql" />
     <Build Include="dbo\Tables\tc_OtrosParametrosFD.sql" />
-    <Build Include="dbo\Tables\tc_noacceso.sql" />
+    <Build Include="dbo\Tables\tc_NoAcceso.sql" />
     <Build Include="dbo\Tables\tc_HoraUsua.sql" />
     <Build Include="dbo\Stored Procedures\SPc_ValidaUsuario.sql" />
     <Build Include="dbo\Stored Procedures\SPc_EncriptaPassword.sql" />

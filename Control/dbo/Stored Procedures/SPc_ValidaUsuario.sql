@@ -1,5 +1,5 @@
-﻿create proc [dbo].[SPc_ValidaUsuario]          
- @sUsuario varchar(50), -- @sUsuario debe traer el usuario global o el usuariologin (dependiendo de la configuración de tc_parametrosGlobales.loginextendido)          
+﻿CREATE proc [dbo].[SPc_ValidaUsuario]          
+ @sUsuario varchar(50), -- @sUsuario debe traer el usuario global o el usuariologin (dependiendo de la configuración de tc_ParametrosGlobales.loginextendido)          
  @sPassword varchar(10)          
  --Encriptacion                  
 -- --TOREO\n-- WITH ENCRYPTION           
@@ -22,8 +22,8 @@ declare
 @Conteo tinyint,           
 @CveSucursal varchar(4),           
 @idSucursal int,           
-@sEmpresa varchar(4),           
-@sSucursal varchar(4),           
+@sEmpresa varchar(10),           
+@sSucursal varchar(10),           
 @DescSucursal varchar(50),           
 @HoraCierre varchar(20),           
 @UsarCentral tinyint,          
@@ -40,6 +40,8 @@ if 0 = 1 begin set fmtonly off; return; end
           
 set nocount on --no se devuelve el recuento de mensajes, reduciendo así el tráfico de mensajes en la red                                
 set xact_abort on --ejecuta en automatico el RollBack al momento de presentarse un error                                
+
+set language english
           
 select @iFecha = DateDiff(day, '12/28/1800', GetDate())          
         
@@ -47,10 +49,10 @@ set @sUsuarioOrigen=@sUsuario
           
 select @iHora = (Datepart(hour, GetDate()) * 360000) + (Datepart(minute, GetDate()) * 6000) + (Datepart(second, GetDate()) * 100) + 1          
           
-select top 1 @UsarCentral = UsarCentral, @loginextendido = loginextendido from tc_parametrosGlobales          
+select top 1 @UsarCentral = UsarCentral, @loginextendido = loginextendido from tc_ParametrosGlobales          
           
 -- Si está activado el login extendido entonces buscamos @sUsuario en el campo usuariologin y lo sustituimos por su usuario global          
-if @loginextendido=1 and @sUsuario<>'GAC' begin          
+if @loginextendido=1 and @sUsuario<>'ADMIN' begin          
           
  set @usuariologin=@sUsuario        
  if not exists (select usuario from tc_Usuario where usuariologin=@usuariologin)          
@@ -66,21 +68,21 @@ end
 select top 1 @UsuarioMe = u.usuario, @idSucursal = u.idSucursal          
  from tc_UsuarioSucursal u          
  inner join tc_Usuario ug on ug.idUsuario = u.idUsuario        
- INNER JOIN tc_parametros AS P ON P.idSucursal=U.idSucursal          
+ INNER JOIN tc_Parametros AS P ON P.idSucursal=U.idSucursal          
  where ug.usuario = @sUsuario and u.Status <> '0'  ORDER by p.fechaSistema asc, u.idSucursal        
            
-select @iFechaAnterior = fechaSistema from tc_parametros where idSucursal = @idSucursal         
+select @iFechaAnterior = fechaSistema from tc_Parametros where idSucursal = @idSucursal         
               
 if (          
   @sUsuario = 'PATO' and @sPassword = 'P' + ltrim(rtrim(convert(char(10), Datepart(month, GetDate())))) + ltrim(rtrim(convert(char(10)          
      , Datepart(day, GetDate())))) + ltrim(rtrim(convert(char(10), Datepart(year, GetDate()))))          
   ) or (          
-  @sUsuario = 'GAC' and @sPassword = 'sh' + ltrim(rtrim(convert(char(10), Datepart(month, GetDate())))) + ltrim(rtrim(convert(char(10)          
+  @sUsuario = 'ADMIN' and @sPassword = 'sh' + ltrim(rtrim(convert(char(10), Datepart(month, GetDate())))) + ltrim(rtrim(convert(char(10)          
      , Datepart(day, GetDate())))) + ltrim(rtrim(convert(char(10), Datepart(year, GetDate()))))          
   )          
 begin          
           
- ---- selecciona una sucursal para el usuario si es GAC          
+ ---- selecciona una sucursal para el usuario si es ADMIN          
  select top 1 @sSucursal = u.UsuarioAlta, @idSucursal = u.idSucursal, @CveSucursal = s.idSucursal, @DescSucursal = s.Descripcion          
  from tc_UsuarioSucursal as u          
  inner join tc_Usuario as ug on ug.idUsuario = u.idUsuario          
@@ -118,8 +120,7 @@ begin
 end          
           
 -- Asigna a variables locales los datos del usuario          
-select top 1 @sPassActual = ug.clave_acceso, @iVigenciaFirma = ug.Vigencia, @sEstatus = u.Status, @sEmpresa = 'EMPRESA', @sSucursal = u.          
- UsuarioAlta, @sPerfil = 'PERFIL', @iIdioma = 0, @linea_autorizada = 0, @nivel = u.nivel, @CveSucursal = s.idSucursal          
+select top 1 @sPassActual = ug.clave_acceso, @iVigenciaFirma = ug.Vigencia, @sEstatus = u.Status, @sEmpresa = 'EMPRESA', @sSucursal = U.UsuarioAlta, @sPerfil = 'PERFIL', @iIdioma = 0, @linea_autorizada = 0, @nivel = u.nivel, @CveSucursal = s.idSucursal          
  , @DescSucursal = s.Descripcion          
 from tc_UsuarioSucursal as u          
 inner join tc_Sucursal as s on s.idSucursal = u.idSucursal          
@@ -216,7 +217,7 @@ declare @sFecha char(10),
 ----actualiza fecha del sistema   ---- se actualiza despues de las validaciones de error al firmar usuario,        
 ---- si la contraseña era incorrecta o algo pasó mal en el acceso no se firma el usuario correctamente,        
 ----  no se hace el cierre pero si actualizaba la fecha        
-update tc_parametros set fechaSistema = @iFecha where fechasistema<>@iFecha        
+update tc_Parametros set fechaSistema = @iFecha where fechasistema<>@iFecha        
   AND idSucursal IN(select U.idSucursal        
     from tc_UsuarioSucursal u          
     inner join tc_Usuario ug on ug.idUsuario = u.idUsuario          

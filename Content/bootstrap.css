@@ -4931,7 +4931,7 @@ a.list-group-item.active > .badge,
   padding: 30px;
   margin-bottom: 30px;
   font-size: 21px;
-  font-weight: 200;
+  font-weight: 100;
   line-height: 2.1428571435;
   color: inherit;
   background-color: #eeeeee;
@@ -4960,7 +4960,7 @@ a.list-group-item.active > .badge,
     padding-left: 60px;
   }
   .jumbotron h1 {
-    font-size: 63px;
+    font-size: 43px;
   }
 }
 

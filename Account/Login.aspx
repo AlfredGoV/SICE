@@ -53,9 +53,7 @@
         </div>
 
         <div class="col-md-4">
-            <section id="socialLoginForm">
-                <uc:openauthproviders runat="server" id="OpenAuthLogin" />
-            </section>
+           
         </div>
     </div>
 </asp:Content>

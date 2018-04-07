@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Document created with XmlGrid Online XML Editor, http://xmlgrid.net -->
+<Configuracion>
+	   <Base>Control</Base>
+       <Cadena>Data Source=localhost;Initial Catalog=Control;Persist Security Info=True;User ID=SA;</Cadena>
+</Configuracion>

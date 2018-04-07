@@ -10,7 +10,7 @@ Public Partial Class Account_Login
     Inherits Page
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         RegisterHyperLink.NavigateUrl = "Register"
-        OpenAuthLogin.ReturnUrl = Request.QueryString("ReturnUrl")
+        'OpenAuthLogin.ReturnUrl = Request.QueryString("ReturnUrl")
         Dim returnUrl = HttpUtility.UrlEncode(Request.QueryString("ReturnUrl"))
         If Not [String].IsNullOrEmpty(returnUrl) Then
             RegisterHyperLink.NavigateUrl += "?ReturnUrl=" & returnUrl

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--Document created with XmlGrid Online XML Editor, http://xmlgrid.net -->
-<!--connectionStrings="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=aspnet-SICE-5225262a-6ceb-4aa1-9118-6d9f8194b44a;AttachDbFilename=|DataDirectory|\aspnet-SICE-5225262a-6ceb-4aa1-9118-6d9f8194b44a.mdf;Integrated Security=SSPI" -->
-<!--connectionString="Data Source=ServerName;Initial Catalog=DatabaseName;Integrated Security=False;User Id=userid;Password=password;MultipleActiveResultSets=True" -->
-<Configuracion>
-	   <Base>Control</Base>
-       <Cadena>Data Source=localhost;Initial Catalog=Control;Persist Security Info=True;User ID=SA;</Cadena>
-</Configuracion>

@@ -80,5 +80,6 @@
     <Build Include="dbo\Tables\tc_HoraUsua.sql" />
     <Build Include="dbo\Stored Procedures\SPc_ValidaUsuario.sql" />
     <Build Include="dbo\Stored Procedures\SPc_EncriptaPassword.sql" />
+    <Build Include="dbo\Tables\ta_TipoAlumno.sql" />
   </ItemGroup>
 </Project>

@@ -430,7 +430,7 @@
                 },
                 formatResult: function (data, value) {
 
-                    //                    $("#idCTA").value = data[0];
+                    //                    $("#idTipoAlumno").value = data[0];
                     return data[2];
 
                 }
@@ -444,7 +444,7 @@
                     var clave = data[1];
                     var nombre = data[2];
 
-                    $("#<%= idCTA.ClientID %>").val(id);
+                    $("#<%= idTipoAlumno.ClientID %>").val(id);
                 }
             });
 
@@ -470,7 +470,7 @@
             },
             formatResult: function (data, value) {
 
-                //                    $("#idCTA").value = data[0];
+                //                    $("#idTipoAlumno").value = data[0];
                 return data[2];
 
             }
@@ -484,7 +484,7 @@
                 var clave = data[1];
                 var nombre = data[2];
 
-                $("#<%= idCTA.ClientID %>").val(id);
+                $("#<%= idTipoAlumno.ClientID %>").val(id);
             }
         });
 
@@ -529,7 +529,7 @@
 <div class="titulo"                 
                 style="background-color: #333333; color: #FFFFFF; font-family: 'Arial Black'; font-weight: bold; font-size: 12px;">
              <asp:Image ID="Image1" runat="server"
-            ImageUrl="../images/gov.gif" />ABC DE CUENTAS LOCAL</div>   
+            ImageUrl="../images/gov.gif" />ABC TIPOS DE ALUMNOS</div>   
 <table width="1200PX">
     <tr>
     <td>
@@ -561,7 +561,7 @@
         <div>
         <input type="text" id="ctalocal" name="ctalocal" runat="server" onclick="this.select();" onfocus="this.select();"
                 style="text-transform: uppercase; width: 334px;" />            
-        <input type="hidden" id="idCTA" name="idCTA" runat="server" value="0" />
+        <input type="hidden" id="idTipoAlumno" name="idTipoAlumno" runat="server" value="0" />
         <%--<asp:TextBox id="TextBox2" runat="server" Width="300px"></asp:TextBox>--%>
         <%--<asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" ></asp:AutoCompleteExtender>--%>
         </div>
@@ -604,12 +604,11 @@
     </tr>
     <tr>
         <td>              
-        <input type="submit" id="btnAlta" name="btnAlta" runat="server" value="Alta" class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idCTA=0&sTipo=Local'); return false;" />
+        <input type="submit" id="btnAlta" name="btnAlta" runat="server" value="Alta" class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idTipoAlumno=0&sTipo=Local'); return false;" />
         </td>
         <td>
         <asp:Button id="btnBuscar" Text="Buscar" runat="server" CssClass="boton"/>
-        <input type ="button" id="exp" runat="server" class="boton"  value="GENERAR XML" onclick="javascript:OpenConsolidar('CATALOGO');" /> 
-        </td>
+        &nbsp;</td>
         <td style="width:5px">
         <asp:DropDownList id="lstTope" runat="server" Enabled="true">
             <asp:ListItem Text= "5"></asp:ListItem>
@@ -636,20 +635,20 @@
     <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" 
         GridLines="None" AllowPaging="True" 
         AutoGenerateColumns="False" DataSourceID="LinqDataSource1" 
-        DataKeyNames="idCTA"  ShowFooter="True" Font-Size="X-Small" 
+        DataKeyNames="idTipoAlumno"  ShowFooter="True" Font-Size="X-Small" 
         Font-Names="Verdana" BorderStyle="Outset" PageSize="5" Width="99%">   
     <AlternatingRowStyle BackColor="White" />
         <Columns>            
             <asp:TemplateField ItemStyle-Width="40">
                 <ItemTemplate> 
-                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idCTA=<%#Eval("idCTA")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" ImageUrl="~/images/EDIT.GIF" Visible='<%# WhichDB() %>' Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
+                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idTipoAlumno=<%#Eval("idTipoAlumno")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" ImageUrl="~/images/EDIT.GIF" Visible='<%# WhichDB() %>' Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
                 </ItemTemplate>
                 <ItemStyle Width="40px" />
             </asp:TemplateField>            
             <asp:TemplateField>
                     <ItemTemplate>                        
-                        <a href="javascript:expandcollapse('div<%# Eval("idCTA") %>', 'one', <%#Eval("idCTA")%>);">
-                            <img id="imgdiv<%# Eval("idCTA") %>" class="imgdiv" alt="Click para mostrar/ocultar las cuentas heredadas <%# Eval("idCTA") %>"  width="10px" height="10px" border="0" src="../images/Plus.ico"/>
+                        <a href="javascript:expandcollapse('div<%# Eval("idTipoAlumno") %>', 'one', <%#Eval("idTipoAlumno")%>);">
+                            <img id="imgdiv<%# Eval("idTipoAlumno") %>" class="imgdiv" alt="Click para mostrar/ocultar las cuentas heredadas <%# Eval("idTipoAlumno") %>"  width="10px" height="10px" border="0" src="../images/Plus.ico"/>
                         </a>                        
                     </ItemTemplate>
             </asp:TemplateField>
@@ -682,17 +681,17 @@
 			        <ItemTemplate>
 			            <tr>
                             <td colspan="8">                                
-                                <div id="div<%# Eval("idCTA") %>" class="exapancontract" style="display:none;position:relative;left:15px;OVERFLOW: auto; WIDTH:97%; background-color: #CCCCCC;" >
+                                <div id="div<%# Eval("idTipoAlumno") %>" class="exapancontract" style="display:none;position:relative;left:15px;OVERFLOW: auto; WIDTH:97%; background-color: #CCCCCC;" >
                                 <div id="divLeft" class="divLeft" style="float: left">
-                                <input type="submit" id="btnAlta" name="btnAlta" value="+Agregar" style='<%# WhichDB2() %>' class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idCTA=0&sTipo=<%=ls_tipo%>&nivel=<%#Eval("nivel")%>&cuentanum=<%#Eval("cuentanum")%>&idpadre=<%#Eval("idcta")%>'); return false;" /><label> NO CUENTA: <%#Eval("cuentanum")%></label>
+                                <input type="submit" id="btnAlta" name="btnAlta" value="+Agregar" style='<%# WhichDB2() %>' class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idTipoAlumno=0&sTipo=<%=ls_tipo%>&nivel=<%#Eval("nivel")%>&cuentanum=<%#Eval("cuentanum")%>&idpadre=<%#Eval("idTipoAlumno")%>'); return false;" /><label> NO CUENTA: <%#Eval("cuentanum")%></label>
                                 </div>                                
                                    <asp:GridView ID="GridView2" AllowPaging="False" AllowSorting="true" BackColor="White" Width="100%" Font-Size="X-Small" AutoGenerateColumns="false" ForeColor="#333333"
-                                            Font-Names="Verdana" runat="server" DataKeyNames="idCTA" ShowFooter="true" GridLines="None" EmptyDataRowStyle-BackColor="#FFFF66">
+                                            Font-Names="Verdana" runat="server" DataKeyNames="idTipoAlumno" ShowFooter="true" GridLines="None" EmptyDataRowStyle-BackColor="#FFFF66">
                                         <AlternatingRowStyle BackColor="White" />
                                         <Columns>                                             
                                           <asp:TemplateField ItemStyle-Width="40">
                                                 <ItemTemplate> 
-                                                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idCTA=<%#Eval("idCTA")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" Visible='<%# WhichDB() %>' ImageUrl="~/images/EDIT.GIF" Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
+                                                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idTipoAlumno=<%#Eval("idTipoAlumno")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" Visible='<%# WhichDB() %>' ImageUrl="~/images/EDIT.GIF" Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
                                                 </ItemTemplate>
                                             </asp:TemplateField>                                            
                                             <asp:BoundField DataField="Nivel" HeaderText="Nivel" 
@@ -718,7 +717,7 @@
                                             
                                             <%-- <asp:TemplateField HeaderText="Saldo" ItemStyle-Width="120">
                                                 <ItemTemplate>
-                                                    <%# FormatCurrency(Convert.ToString(ComputeSaldos(Eval("idCTA")), New System.Globalization.CultureInfo("es-MX")))%>
+                                                    <%# FormatCurrency(Convert.ToString(ComputeSaldos(Eval("idTipoAlumno")), New System.Globalization.CultureInfo("es-MX")))%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Right" Width="120"/>                                                 
                                             </asp:TemplateField>--%>
@@ -758,7 +757,7 @@
     <asp:LinqDataSource ID="LinqDataSource1" runat="server" 
         ContextTypeName="GoVirtualMCo.Internet" EnableDelete="True" 
         EnableInsert="True" EnableUpdate="True" EntityTypeName="" 
-        TableName="tbco_catalogo" OrderBy="Nombre, Clave, Naturaleza, EF" 
+        TableName="ta_TipoAlumno" OrderBy="idTipoAlumno,Tipo,Descripcion" 
         Where="Nivel == @Nivel">
         <WhereParameters>
             <asp:ControlParameter ControlID="DDLNivel" DefaultValue="1" Name="Nivel" 

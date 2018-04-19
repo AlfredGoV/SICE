@@ -1,0 +1,15 @@
+USE [Control]
+GO
+
+SELECT [idTipoAlumno]
+      ,[Tipo]
+      ,[Descripcion]
+  FROM [dbo].[ta_TipoAlumno]
+GO
+
+--INSERT INTO [ta_TipoAlumno] VALUES('NOR','ALUMNO NORMAL')
+--INSERT INTO [ta_TipoAlumno] VALUES('BEC1','ALUMNO BECADO 50%')
+
+idTipoAlumno,Tipo,Descripcion
+
+isnull(idTipoAlumno,0) as idTipoAlumno,isnull(Tipo,'') as Tipo,isnull(Descripcion,'') as Descripcion

@@ -127,7 +127,7 @@ Public Class Alumnos_c_TipoAlumnos_A
     Protected Sub Buscar()
 
         GridView1.DataSourceID = ""
-        GridView1.DataSource = db2.GetDataTable("select isnull(idCta,'') as idcta, isnull(CuentaNum,'') as CuentaNum, isnull(tipo,'') as tipo, isnull(grupo,'') as grupo, isnull(Cuenta,'') as Cuenta, isnull(subcuenta,'') as subcuenta, isnull(analitica,'') as analitica, isnull(subanalitica,'') as subanalitica, isnull(razonsocial,'') as razonsocial, isnull(distribuidor,'') as distribuidor, isnull(SUCURSAL,'') as sucursal, isnull(departamento,'') as departamento, isnull(moneda,'') as moneda, isnull(Clave,'') as Clave, isnull(CodigoSat,'') as CodigoSat, isnull(Nombre,'') as Nombre, isnull(idPadre,'') as idPadre, isnull(cuentamin,'') as cuentamin, isnull(cuentamax,'') as cuentamax, isnull(idEmpresa,'') as idEmpresa, isnull(idSucursal,'') as idSucursal, isnull(Naturaleza,'') as Naturaleza, isnull(Nivel,'') as Nivel, isnull(EF,'') as EF, isnull(Usuario,'') as Usuario, isnull(FechaAlta,'') as FechaAlta, isnull(Ejercicio,'') as Ejercicio, isnull(Periodo,'') as Periodo, isnull(cuenta10,'') as cuenta10, isnull(cuenta6,'') as cuenta6, isnull(acumuladora,'') as acumuladora, isnull(eq,'') as eq from tbco_catalogo where nombre like '%" + ctalocal.Value.Trim + "%' and nivel like '%" + DDLNivel.SelectedValue + "%' and naturaleza like '%" + DDLNaturaleza.SelectedValue + "%' order by clave")
+        GridView1.DataSource = db2.GetDataTable("select isnull(idTipoAlumno,0) as idTipoAlumno,isnull(Tipo,'') as Tipo,isnull(Descripcion,'') as Descripcion from ta_TipoAlumno where Descripcion like '%" + ctalocal.Value.Trim + "%'  order by idTipoAlumno")
 
         GridView1.DataBind()
 

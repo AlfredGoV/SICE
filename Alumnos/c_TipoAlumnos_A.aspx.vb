@@ -1,7 +1,7 @@
 ﻿Imports System.Web.Services
 Imports System.Type
 Imports System.Data.Common
-Imports LinqToExcel
+'Imports LinqToExcel
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports System.Data
@@ -57,14 +57,12 @@ Public Class Alumnos_c_TipoAlumnos_A
 
                     GridView1.Columns(0).Visible = True
                     btnAlta.Visible = True
-                    ImageButton2.Visible = True
-                    ImageButton3.Visible = True
+
 
                 Case Else
                     GridView1.Columns(0).Visible = False
                     btnAlta.Visible = False
-                    ImageButton2.Visible = False
-                    ImageButton3.Visible = False
+
 
             End Select
         End If
@@ -77,8 +75,7 @@ Public Class Alumnos_c_TipoAlumnos_A
                 Case "CONTAAUX"
                     GridView1.Columns(0).Visible = False
                     btnAlta.Attributes.Add("disabled", "disabled")
-                    ImageButton2.Visible = False
-                    ImageButton3.Visible = False
+
             End Select
 
         End If
@@ -86,30 +83,7 @@ Public Class Alumnos_c_TipoAlumnos_A
 
         CargarParametros()
 
-        Select Case (Request.QueryString("sResult"))
 
-            Case "1"
-                'GuardarDatos()
-
-            Case "catalogo"
-
-                'IMPORTAR CATALOGO LOCAL
-                If Session("Carga") = Nothing Then
-
-                    'MARCAR ESTATUS DE SALDOS INICIALES
-                    db2.EjecutarSQL("update tbco_PeriodosSucursal set Inicial = ''")
-                    db2.EjecutarSQL("update tbco_PeriodosSucursal set Status = 'A', Inicial = 'C' where idPeriodo = " + li_idperiodo.ToString + " And idEjercicio = " + li_idejercicio.ToString)
-                    db2.EjecutarSQL("update tbco_PeriodosSucursal set Status = 'A', Inicial = 'S' where idPeriodo = " + (li_idperiodo + 1).ToString + " And idEjercicio = " + li_idejercicio.ToString)
-
-                    'Importar()
-                    'Session("Carga") = "True"
-
-                End If
-
-            Case "global"
-                CargarRC()
-
-        End Select
 
 
         ls_tipo = "Local"

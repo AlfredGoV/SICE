@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Site.master" AutoEventWireup="false" CodeFile="Alumnos.aspx.vb" Inherits="Alumnos_Alumnos" %>
 
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
+
+
     <div class="jumbotron">
         <h1>ALUMNOS</h1>
         

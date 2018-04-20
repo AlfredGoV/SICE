@@ -30,7 +30,7 @@
     var ArchivoXML = ""
 
 
-     function ImpCuentas() {   
+     function ImpAlumnos() {   
             var ls_usuario = "<%=session("sUsuario")%>"
             var ls_usuarioGlobal = "<%=session("sUsuarioGlobal")%>"
 
@@ -50,7 +50,7 @@
                 'showCloseButton': false,
                 'titleShow':'false',
                 'enableEscapeButton' : 'false',
-                'href': "co_ProgressBar.aspx?descripcion=CUENTAS&ejercicio=0&periodo=0&estado=REPORTADO&razon=0&agencia=0&sUsuario="+ls_usuario+"&sUsuarioGlobal="+ls_usuarioGlobal+"&archivo=CUENTAS&idhpol=0&registro=0",
+                'href': "co_ProgressBar.aspx?descripcion=Alumnos&ejercicio=0&periodo=0&estado=REPORTADO&razon=0&agencia=0&sUsuario="+ls_usuario+"&sUsuarioGlobal="+ls_usuarioGlobal+"&archivo=Alumnos&idhpol=0&registro=0",
                 'onClosed': function () {
                     //tableView.rebind();
                 }
@@ -104,24 +104,7 @@
 
 
 
-         function OpenConsolidar(tipo) {
-             $.fancybox({
-                 'scrolling': 'yes',
-                 'width': 700,
-                 'height': 200,
-                 'transitionIn': 'fade',
-                 'transitionOut': 'fade',
-                 'titlePosition': 'inside',
-                 'type': 'iframe',
-                 'href': "co_ProgressBar.aspx?descripcion=" + tipo + "&ejercicio=0&periodo=0&estado=REPORTADO&razon=" + ll_RFC + "&agencia=0&usuario=" + ll_usuario + "&archivo=" + tipo +  "&idhpol=0&registro=0",
-                 'onClosed': function () {
-                    BindGrid();
-                 }
-             });
-
-         }
-
-
+         
 
 
     function formatTitle(title, currentArray, currentIndex, currentOpts) {
@@ -498,7 +481,7 @@
             'transitionOut': 'fade',
             'titlePosition': 'inside',
             'type': 'iframe',
-            'href': "co_abcCuentas.aspx",
+            'href': "co_abcAlumnos.aspx",
             'onClosed': function () { document.getElementById("form1").submit(); }
         });
 
@@ -525,31 +508,19 @@
 
     <input type="hidden" id="idEval" name="idEval" runat="server" />
 
-<div id="fCatCuentas" style="padding-top:30px">
+<div id="fCatAlumnos" style="padding-top:30px">
 <div class="titulo"                 
                 style="background-color: #333333; color: #FFFFFF; font-family: 'Arial Black'; font-weight: bold; font-size: 12px;">
              <asp:Image ID="Image1" runat="server"
-            ImageUrl="../images/gov.gif" />ABC TIPOS DE ALUMNOS</div>   
+            ImageUrl="../images/gov.PNG" />ABC TIPOS DE ALUMNOS</div>   
 <table width="1200PX">
     <tr>
     <td>
         <ul>
         <li>
-        Nivel
+        
         <div>
-            <asp:DropDownList ID="DDLNivel" runat="server" Width="65">          
-                <asp:ListItem Text="Todos" Value="" ></asp:ListItem>                
-                <asp:ListItem Text="1" Value="1" Selected="True"></asp:ListItem>
-                <asp:ListItem Text="2" Value="2"></asp:ListItem>                    
-                <asp:ListItem Text="3" Value="3"></asp:ListItem>
-                <asp:ListItem Text="4" Value="4"></asp:ListItem>
-                <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                <asp:ListItem Text="6" Value="6"></asp:ListItem>
-                <asp:ListItem Text="7" Value="7"></asp:ListItem>
-                <asp:ListItem Text="8" Value="8"></asp:ListItem>
-                <asp:ListItem Text="9" Value="9"></asp:ListItem>
-                <asp:ListItem Text="10" Value="10"></asp:ListItem>
-            </asp:DropDownList>
+            
         </div>
         </li>    
         </ul>
@@ -557,7 +528,7 @@
         <td>
         <ul>
         <li>
-        Cuenta
+        Descripción
         <div>
         <input type="text" id="ctalocal" name="ctalocal" runat="server" onclick="this.select();" onfocus="this.select();"
                 style="text-transform: uppercase; width: 334px;" />            
@@ -571,13 +542,9 @@
         <td>
         <ul>
         <li>
-        Naturaleza
+        
         <div>
-        <asp:DropDownList ID="DDLNaturaleza" runat="server">
-        <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>
-        <asp:ListItem Text="Deudora" Value="Deudor"></asp:ListItem>
-        <asp:ListItem Text="Acredora" Value="Acredor"></asp:ListItem>
-        </asp:DropDownList>
+        
         <%--<asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" ></asp:AutoCompleteExtender>--%>
         </div>
         </li>
@@ -591,20 +558,16 @@
                 ToolTip="Deshacer Filtros" />
         </div>
         <div style="padding: 5px; float: left">
-        <asp:ImageButton ID="ImageButton2" runat="server" 
-                ImageUrl="~/images/importar.png" Height="30px" Width="30px" 
-                ToolTip="Importar Cuentas" OnClientClick="javascripr:OpenImport('co_abcImportExcel.aspx?sTipo=catalogo');  return false;" />
+        
         </div>
         <div style="padding: 5px; float: left">
-        <asp:ImageButton ID="ImageButton3" runat="server" 
-                ImageUrl="~/images/concentradora.png" Height="30px" Width="30px" 
-                ToolTip="Definir Cuenta Concentradora" OnClientClick="javascripr:OpenConcentradora('co_abcCtaConcentradora.aspx');  return false;" />
+       
         </div>
         </td>        
     </tr>
     <tr>
         <td>              
-        <input type="submit" id="btnAlta" name="btnAlta" runat="server" value="Alta" class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idTipoAlumno=0&sTipo=Local'); return false;" />
+        <input type="submit" id="btnAlta" name="btnAlta" runat="server" value="Alta" class="boton" onclick="OpenFancy('co_abcAlumnos.aspx?idTipoAlumno=0&sTipo=Local'); return false;" />
         </td>
         <td>
         <asp:Button id="btnBuscar" Text="Buscar" runat="server" CssClass="boton"/>
@@ -641,105 +604,23 @@
         <Columns>            
             <asp:TemplateField ItemStyle-Width="40">
                 <ItemTemplate> 
-                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idTipoAlumno=<%#Eval("idTipoAlumno")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" ImageUrl="~/images/EDIT.GIF" Visible='<%# WhichDB() %>' Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
+                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcAlumnos.aspx?idTipoAlumno=<%#Eval("idTipoAlumno")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" ImageUrl="~/Pics/EDIT.GIF" Visible='<%# WhichDB() %>' Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
                 </ItemTemplate>
                 <ItemStyle Width="40px" />
             </asp:TemplateField>            
-            <asp:TemplateField>
-                    <ItemTemplate>                        
-                        <a href="javascript:expandcollapse('div<%# Eval("idTipoAlumno") %>', 'one', <%#Eval("idTipoAlumno")%>);">
-                            <img id="imgdiv<%# Eval("idTipoAlumno") %>" class="imgdiv" alt="Click para mostrar/ocultar las cuentas heredadas <%# Eval("idTipoAlumno") %>"  width="10px" height="10px" border="0" src="../images/Plus.ico"/>
-                        </a>                        
-                    </ItemTemplate>
-            </asp:TemplateField>
-             <asp:BoundField DataField="Nivel" HeaderText="Nivel" 
-                    SortExpression="Nivel" ItemStyle-Width="120" >
+            
+             <asp:BoundField DataField="Tipo" HeaderText="Nivel" 
+                    SortExpression="Tipo" ItemStyle-Width="120" >
             </asp:BoundField>
-            <asp:BoundField DataField="Nombre" HeaderText="Nombre" 
-                SortExpression="Nombre" ItemStyle-Width="300" >
+            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" 
+                SortExpression="Descripcion" ItemStyle-Width="300" >
             <ItemStyle Width="300px" />
             </asp:BoundField>
             
-			<asp:BoundField DataField="Clave" HeaderText="Clave" 
-                SortExpression="Clave" ItemStyle-Width="300" >            
-            <ItemStyle Width="300px" />
-            </asp:BoundField>                       
-            
-			<asp:BoundField DataField="Naturaleza" HeaderText="Naturaleza"
-                    SortExpression = "Naturaleza" ItemStyle-Width= "300" >
-					<ItemStyle Width="300px" />
-			</asp:BoundField>			
-                
-            <asp:TemplateField HeaderText="Tipo" ItemStyle-Width="120">
-                <ItemTemplate>
-                    <%# ComputeEstadoF(Eval("EF"))%>
-                </ItemTemplate>
-                <ItemStyle Width="120px" />
-            </asp:TemplateField>             
-       
-             <asp:TemplateField>
-			        <ItemTemplate>
-			            <tr>
-                            <td colspan="8">                                
-                                <div id="div<%# Eval("idTipoAlumno") %>" class="exapancontract" style="display:none;position:relative;left:15px;OVERFLOW: auto; WIDTH:97%; background-color: #CCCCCC;" >
-                                <div id="divLeft" class="divLeft" style="float: left">
-                                <input type="submit" id="btnAlta" name="btnAlta" value="+Agregar" style='<%# WhichDB2() %>' class="boton" onclick="OpenFancy('co_abcCuentas.aspx?idTipoAlumno=0&sTipo=<%=ls_tipo%>&nivel=<%#Eval("nivel")%>&cuentanum=<%#Eval("cuentanum")%>&idpadre=<%#Eval("idTipoAlumno")%>'); return false;" /><label> NO CUENTA: <%#Eval("cuentanum")%></label>
-                                </div>                                
-                                   <asp:GridView ID="GridView2" AllowPaging="False" AllowSorting="true" BackColor="White" Width="100%" Font-Size="X-Small" AutoGenerateColumns="false" ForeColor="#333333"
-                                            Font-Names="Verdana" runat="server" DataKeyNames="idTipoAlumno" ShowFooter="true" GridLines="None" EmptyDataRowStyle-BackColor="#FFFF66">
-                                        <AlternatingRowStyle BackColor="White" />
-                                        <Columns>                                             
-                                          <asp:TemplateField ItemStyle-Width="40">
-                                                <ItemTemplate> 
-                                                   <a id="a1" class="editlink" href="#" onclick="javascript:OpenFancy('co_abcCuentas.aspx?idTipoAlumno=<%#Eval("idTipoAlumno")%>&sTipo=<%=ls_tipo%>')"><asp:Image ID="Image1" runat="server" Visible='<%# WhichDB() %>' ImageUrl="~/images/EDIT.GIF" Height="25" Width="25" BorderStyle="None"></asp:Image></a>                                  
-                                                </ItemTemplate>
-                                            </asp:TemplateField>                                            
-                                            <asp:BoundField DataField="Nivel" HeaderText="Nivel" 
-                                                SortExpression="Nivel" ItemStyle-Width="120" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" 
-                                                SortExpression="Nombre" ItemStyle-Width="200" />
-                                            <asp:BoundField DataField="Clave" HeaderText="Clave" 
-                                                SortExpression="Clave" ItemStyle-Width="200" />   
-												
-                                            <asp:BoundField DataField="Naturaleza" HeaderText="Naturaleza"
-													 SortExpression = "Naturaleza" ItemStyle-Width = "200" />
-													
-				
 			
-                                         <asp:TemplateField HeaderText="Tipo" ItemStyle-Width="120">
-                                                <ItemTemplate>
-                                                    <%# ComputeEstadoF(Eval("EF"))%>
-                                                </ItemTemplate>
-                                                <ItemStyle Width="120px" />
-                                            </asp:TemplateField>  
-
-                                            
-                                            <%-- <asp:TemplateField HeaderText="Saldo" ItemStyle-Width="120">
-                                                <ItemTemplate>
-                                                    <%# FormatCurrency(Convert.ToString(ComputeSaldos(Eval("idTipoAlumno")), New System.Globalization.CultureInfo("es-MX")))%>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Right" Width="120"/>                                                 
-                                            </asp:TemplateField>--%>
-                                        </Columns>
-                                         <EmptyDataTemplate>        
-                                            No existen registros disponibles...
-                                        </EmptyDataTemplate>
-                                        <FooterStyle BackColor="#FFCC00" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#FFCC00" Font-Bold="True" ForeColor="White" />
-                                        <PagerStyle BackColor="#FFCC00" ForeColor="White" HorizontalAlign="Center" />
-                                        <RowStyle BackColor="#EFEFEF" />
-                                        <SelectedRowStyle BackColor="#FFFF99" Font-Bold="True" ForeColor="#333333" />
-                                        <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                        <SortedAscendingHeaderStyle BackColor="#FFCC00" />
-                                        <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                        <SortedDescendingHeaderStyle BackColor="#FFCC00" />
-                                   </asp:GridView>
-                                </div>
-                             </td>
-                        </tr>
-			        </ItemTemplate>			       
-			    </asp:TemplateField>            
+			            
+       
+                    
         </Columns>            
     <EmptyDataTemplate>        
         <div style='display:block; text-align:center; font-size:12px'><img style='padding-left:5px; padding-right:5px' src='../images/document_warning.png' alt='' width='125' height='125'/><h1>NO EXISTEN ELEMENTOS</h1><a href='co_rptPolizas.aspx?sResult=1'>¡ HAGA CLICK AQUI !, PARA BUSQUEDA SUGERIDA</a></div>
@@ -755,14 +636,11 @@
     <SortedDescendingHeaderStyle BackColor="#F8981D" />
     </asp:GridView>                     
     <asp:LinqDataSource ID="LinqDataSource1" runat="server" 
-        ContextTypeName="GoVirtualMCo.Internet" EnableDelete="True" 
+        ContextTypeName="SICE.Internet" EnableDelete="True" 
         EnableInsert="True" EnableUpdate="True" EntityTypeName="" 
         TableName="ta_TipoAlumno" OrderBy="idTipoAlumno,Tipo,Descripcion" 
-        Where="Nivel == @Nivel">
-        <WhereParameters>
-            <asp:ControlParameter ControlID="DDLNivel" DefaultValue="1" Name="Nivel" 
-                PropertyName="SelectedValue" Type="Int32" />
-        </WhereParameters>
+        >
+        
     </asp:LinqDataSource>
 </ContentTemplate>
 </asp:UpdatePanel>

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[sys_Sucursal] (
-    [id_Empresa]   TINYINT       NOT NULL,
-    [id_Sucursal]  INT           NOT NULL,
-    [Matriz]      TINYINT       NOT NULL,
+    [id_Empresa]   TINYINT        NULL,
+    [id_Sucursal]  INT    IDENTITY(1,1)       NOT NULL,
+    [Matriz]      TINYINT        NULL,
     [calle]       VARCHAR (180) NULL,
     [noExt]       VARCHAR (10)  NULL,
     [noInt]       VARCHAR (10)  NULL,

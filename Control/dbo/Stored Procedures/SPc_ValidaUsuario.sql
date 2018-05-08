@@ -8,7 +8,7 @@ SET NOCOUNT ON
           
 declare           
 @sPassActual varchar(10),           
-@iVigencia_Firma int,           
+@iVigencia_Firma SMALLDATETIME,           
 @sEstatus varchar(1),           
 @iFecha int,           
 @iHora int,           
@@ -33,7 +33,8 @@ declare
 @fdMinutos varchar (2),                 
 @fdsegundos varchar (2),           
 @HoraAlta char(8),        
-@sUsuarioOrigen varchar(50)         
+@sUsuarioOrigen varchar(50),
+@id_Usuario INT
           
 -- Evita que crystal meta su cuchara en el SP que ni entiende.          
 if 0 = 1 begin set fmtonly off; return; end          
@@ -55,21 +56,21 @@ select top 1 @UsarCentral = UsarCentral, @loginextendido = loginextendido from s
 if @loginextendido=1 and @sUsuario<>'ADMIN' begin          
           
  set @Usuario_Login=@sUsuario        
- if not exists (select Usuario from sys_Usuario where Usuario_Login=@Usuario_Login)          
+ if not exists (select id_Usuario from sys_Usuario where Usuario_Login=@Usuario_Login)          
  begin          
   select 70059, 'Usuario No Existe en Base de Datos'          
   return          
  end          
             
  set @sUsuario=''            
- select @sUsuario=Usuario from sys_Usuario where Usuario_Login=@Usuario_Login          
+ select @id_Usuario=id_Usuario from sys_Usuario where Usuario_Login=@Usuario_Login          
 end          
           
 select top 1 @UsuarioMe = u.Usuario, @id_Sucursal = u.id_Sucursal          
  from sys_Usuario_Sucursal u          
  inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario        
  INNER JOIN sys_Parametros AS P ON P.id_Sucursal=U.id_Sucursal          
- where ug.Usuario = @sUsuario and u.Status <> '0'  ORDER by p.fechaSistema asc, u.id_Sucursal        
+ where ug.id_Usuario = @id_Usuario and u.Status <> '0'  ORDER by p.fechaSistema asc, u.id_Sucursal        
            
 select @iFechaAnterior = fechaSistema from sys_Parametros where id_Sucursal = @id_Sucursal         
               
@@ -87,7 +88,7 @@ begin
  from sys_Usuario_Sucursal as u          
  inner join sys_Usuario as ug on ug.id_Usuario = u.id_Usuario          
  inner join sys_Sucursal as s on s.id_Sucursal = u.id_Sucursal          
- where ug.Usuario = @sUsuario and u.Status <> '0'           
+ where ug.id_Usuario = @id_Usuario and u.Status <> '0'           
  order by s.id_Sucursal          
           
  select @Conteo = COUNT(Usuario)          
@@ -112,7 +113,7 @@ select @sEmpresa = '', @sSucursal = ''
 if not exists (          
   select * from sys_Usuario_Sucursal u          
   inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
-  where ug.Usuario = @sUsuario )          
+  where ug.id_Usuario = @id_Usuario )          
 begin          
  select 70059, 'Usuario No Existe en Base de Datos'          
           
@@ -125,14 +126,14 @@ select top 1 @sPassActual = ug.clave_acceso, @iVigencia_Firma = ug.Vigencia, @sE
 from sys_Usuario_Sucursal as u          
 inner join sys_Sucursal as s on s.id_Sucursal = u.id_Sucursal          
 inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
-where ug.Usuario = @sUsuario and u.Status <> '0'          
+where ug.id_Usuario = @id_Usuario and u.Status <> '0'          
 order by u.Status desc          
           
 -- Cuenta los Usuarios (uno por sucursal) con que cuenta el Usuario global          
 select @Conteo = COUNT(U.Usuario)          
 from sys_Usuario_Sucursal u          
 inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
-where ug.Usuario = @sUsuario and u.Status <> '0'          
+where ug.id_Usuario = @id_Usuario and u.Status <> '0'          
           
 exec SPc_EncriptaPassword @sPassword, @sRegresa = @sPassword output          
           
@@ -179,7 +180,7 @@ declare @iDiaSem int
 select @iDiaSem = datepart(dw, DateAdd(day, @iFecha, '12/28/1800'))          
           
 if exists (          
-  select * from cmtbl_horausua          
+  select * from sys_Hora_Usuario          
   where sUsuario = @sUsuario and idia = @iDiaSem and @iHora between ideHora and iaHora          
   )          
 begin          
@@ -221,7 +222,7 @@ update sys_Parametros set fechaSistema = @iFecha where fechasistema<>@iFecha
   AND id_Sucursal IN(select U.id_Sucursal        
     from sys_Usuario_Sucursal u          
     inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
-    where ug.Usuario = @sUsuario and u.Status <> '0'  )          
+    where ug.id_Usuario = @id_Usuario and u.Status <> '0'  )          
           
           
 -- @iFechaAnterior trae la fecha del sistema del ultimo dia laboral                   
@@ -248,7 +249,7 @@ begin
  select TOP 1 @UsuarioMe = u.Usuario, @id_Sucursal = id_Sucursal          
  from sys_Usuario_Sucursal u          
  inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
- where ug.Usuario = @sUsuario and u.Status <> '0'  ORDER BY id_Sucursal        
+ where ug.id_Usuario = @id_Usuario and u.Status <> '0'  ORDER BY id_Sucursal        
         
      
 end

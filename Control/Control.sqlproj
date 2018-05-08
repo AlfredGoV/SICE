@@ -81,5 +81,6 @@
     <Build Include="dbo\Stored Procedures\SPc_ValidaUsuario.sql" />
     <Build Include="dbo\Stored Procedures\SPc_EncriptaPassword.sql" />
     <Build Include="dbo\Tables\sys_Tipo_Alumno.sql" />
+    <Build Include="dbo\Tables\sys_Perfil_Usuario.sql" />
   </ItemGroup>
 </Project>

@@ -62,24 +62,24 @@
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\tc_UsuarioSucursal.sql" />
-    <Build Include="dbo\Tables\tc_Usuario.sql" />
-    <Build Include="dbo\Tables\tc_Sucursal.sql" />
-    <Build Include="dbo\Tables\tc_Estado.sql" />
-    <Build Include="dbo\Tables\tc_Empresa.sql" />
-    <Build Include="dbo\Tables\tc_CodigosPostales.sql" />
-    <Build Include="dbo\Tables\tc_Ciudad.sql" />
+    <Build Include="dbo\Tables\sys_Usuario_Sucursal.sql" />
+    <Build Include="dbo\Tables\sys_Usuario.sql" />
+    <Build Include="dbo\Tables\sys_Sucursal.sql" />
+    <Build Include="dbo\Tables\sys_Estado.sql" />
+    <Build Include="dbo\Tables\sys_Empresa.sql" />
+    <Build Include="dbo\Tables\sys_Codigos_Postales.sql" />
+    <Build Include="dbo\Tables\sys_Ciudad.sql" />
     <Build Include="dbo\Tables\tbcm_estado.sql" />
     <Build Include="dbo\Tables\tbcm_Ciudad.sql" />
-    <Build Include="dbo\Tables\tc_UsrFirmadosH.sql" />
-    <Build Include="dbo\Tables\tc_UsrFirmados.sql" />
-    <Build Include="dbo\Tables\tc_ParametrosGlobales.sql" />
-    <Build Include="dbo\Tables\tc_Parametros.sql" />
-    <Build Include="dbo\Tables\tc_OtrosParametrosFD.sql" />
-    <Build Include="dbo\Tables\tc_NoAcceso.sql" />
-    <Build Include="dbo\Tables\tc_HoraUsua.sql" />
+    <Build Include="dbo\Tables\sys_Usuarios_FirmadosH.sql" />
+    <Build Include="dbo\Tables\sys_Usuarios_Firmados.sql" />
+    <Build Include="dbo\Tables\sys_Parametros_Globales.sql" />
+    <Build Include="dbo\Tables\sys_Parametros.sql" />
+    <Build Include="dbo\Tables\sys_Otros_Parametros.sql" />
+    <Build Include="dbo\Tables\sys_No_Acceso.sql" />
+    <Build Include="dbo\Tables\sys_Hora_Usuario.sql" />
     <Build Include="dbo\Stored Procedures\SPc_ValidaUsuario.sql" />
     <Build Include="dbo\Stored Procedures\SPc_EncriptaPassword.sql" />
-    <Build Include="dbo\Tables\ta_TipoAlumno.sql" />
+    <Build Include="dbo\Tables\sys_Tipo_Alumno.sql" />
   </ItemGroup>
 </Project>

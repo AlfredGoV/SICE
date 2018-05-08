@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tc_CodigosPostales] (
+﻿CREATE TABLE [dbo].[sys_Codigos_Postales] (
     [d_codigo]         NVARCHAR (255) NULL,
     [d_asenta]         NVARCHAR (255) NULL,
     [d_tipo_asenta]    NVARCHAR (255) NULL,

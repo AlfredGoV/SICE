@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tc_OtrosParametrosFD] (
+﻿CREATE TABLE [dbo].[sys_Otros_Parametros] (
     [emailRecepcion]                VARCHAR (100) NULL,
     [emailVentas]                   VARCHAR (100) NULL,
     [emailEscolar]                  VARCHAR (100) NULL,
@@ -16,6 +16,6 @@
     [NombreReportePDFVUsadoACuenta] VARCHAR (50)  NULL,
     [TimbradoPrueba]                VARCHAR (6)   NULL,
     [VigenciaCer]                   VARCHAR (10)  NULL,
-    CONSTRAINT [FK_tc_OtrosParametrosFD_Sucursal] FOREIGN KEY ([idSucursal]) REFERENCES [dbo].[tc_Sucursal] ([idSucursal])
+    CONSTRAINT [FK_sys_Otros_Parametros_Sucursal] FOREIGN KEY ([idSucursal]) REFERENCES [dbo].[sys_Sucursal] ([idSucursal])
 );
 

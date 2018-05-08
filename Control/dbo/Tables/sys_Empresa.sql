@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tc_Empresa] (
+﻿CREATE TABLE [dbo].[sys_Empresa] (
     [idEmpresa] TINYINT      NOT NULL,
     [empresa]   VARCHAR (50) NULL,
     [rfc]       VARCHAR (13) NULL,

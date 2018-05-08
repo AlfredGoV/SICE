@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tc_Usuario] (
+﻿CREATE TABLE [dbo].[sys_Usuario] (
     [idUsuario]     INT          IDENTITY (1, 1) NOT NULL,
     [Usuario]       VARCHAR (6)  NOT NULL,
     [Clave_Acceso]  VARCHAR (10) NULL,

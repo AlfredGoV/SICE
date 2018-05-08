@@ -1,10 +1,10 @@
-﻿CREATE TABLE [dbo].[tc_UsrFirmados] (
+﻿CREATE TABLE [dbo].[sys_Usuarios_Firmados] (
     [Usuario]         VARCHAR (6)  NOT NULL,
     [Fecha]           INT          NULL,
     [Hora]            INT          NULL,
     [Proceso]         VARCHAR (20) NULL,
-    [IgnorarNoAcceso] TINYINT      CONSTRAINT [DF_tc_usrfirmados_IgnorarNoAcceso] DEFAULT ((1)) NULL,
-    CONSTRAINT [PK_usrfirmados] PRIMARY KEY CLUSTERED ([Usuario] ASC) WITH (FILLFACTOR = 90)
+    [IgnorarNoAcceso] TINYINT      CONSTRAINT [DF_sys_Usuarios_Firmados_IgnorarNoAcceso] DEFAULT ((1)) NULL,
+    CONSTRAINT [PK_Usuarios_Firmados] PRIMARY KEY CLUSTERED ([Usuario] ASC) WITH (FILLFACTOR = 90)
 );
 
 
@@ -15,8 +15,8 @@ GO
 -- Description:	<Para guardar un historial de USUARIOS firmados en el VDealer>
 -- =============================================
 
-create TRIGGER [dbo].[CMtrg_tc_usrfirmados] 
-   ON  [dbo].[tc_usrfirmados]
+create TRIGGER [dbo].[CMtrg_sys_Usuarios_Firmados] 
+   ON  [dbo].[sys_Usuarios_Firmados]
    AFTER INSERT, UPDATE, DELETE
 AS 
 BEGIN
@@ -52,7 +52,7 @@ select * into #del from deleted
 
 
 if @Type<>'U'
-	insert into tc_usrfirmadosH
+	insert into sys_Usuarios_FirmadosH
 			(Type,UsuarioOld,FechaOld,HoraOld,ProcesoOld,UsuarioNew,FechaNew,HoraNew,ProcesoNew)	
 	select  @Type, d.Usuario,d.Fecha,d.Hora,d.Proceso, i.Usuario,i.Fecha,i.Hora,i.Proceso
 	from #ins i full outer join #del d on 
@@ -62,7 +62,7 @@ if @Type<>'U'
 	or (i.Usuario is not null and  d.Usuario is null)
 
 else
-	insert into tc_usrfirmadosH
+	insert into sys_Usuarios_FirmadosH
 			(Type,UsuarioOld,FechaOld,HoraOld,ProcesoOld,UsuarioNew,FechaNew,HoraNew,ProcesoNew)	
 	select  @Type,d.Usuario,d.Fecha,d.Hora,d.Proceso, i.Usuario,i.Fecha,i.Hora,i.Proceso
 	from #ins i full outer join #del d on  i.Usuario = d.Usuario 	

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[sys_Sucursal] (
-    [idEmpresa]   TINYINT       NOT NULL,
-    [idSucursal]  INT           NOT NULL,
+    [id_Empresa]   TINYINT       NOT NULL,
+    [id_Sucursal]  INT           NOT NULL,
     [Matriz]      TINYINT       NOT NULL,
     [calle]       VARCHAR (180) NULL,
     [noExt]       VARCHAR (10)  NULL,
@@ -13,7 +13,7 @@
     [logo]        VARCHAR (40)  NULL,
     [Telefono]    VARCHAR (30)  NULL,
     [Descripcion] VARCHAR (50)  NULL,
-    CONSTRAINT [PK_tc_catSucursal] PRIMARY KEY NONCLUSTERED ([idSucursal] ASC),
-    CONSTRAINT [FK_sys_Sucursal_Empresa] FOREIGN KEY ([idEmpresa]) REFERENCES [dbo].[sys_Empresa] ([idEmpresa])
+    CONSTRAINT [PK_tc_catSucursal] PRIMARY KEY NONCLUSTERED ([id_Sucursal] ASC),
+    CONSTRAINT [FK_sys_Sucursal_Empresa] FOREIGN KEY ([id_Empresa]) REFERENCES [dbo].[sys_Empresa] ([id_Empresa])
 );
 

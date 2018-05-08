@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[sys_Empresa] (
-    [idEmpresa] TINYINT      NOT NULL,
-    [empresa]   VARCHAR (50) NULL,
-    [rfc]       VARCHAR (13) NULL,
-    CONSTRAINT [PK_tc_catEmpresa] PRIMARY KEY NONCLUSTERED ([idEmpresa] ASC) WITH (FILLFACTOR = 90)
+    [id_Empresa] TINYINT      NOT NULL,
+    [Empresa]   VARCHAR (50) NULL,
+    [RFC]       VARCHAR (13) NULL,
+    CONSTRAINT [PK_tc_catEmpresa] PRIMARY KEY NONCLUSTERED ([id_Empresa] ASC) WITH (FILLFACTOR = 90)
 );
 

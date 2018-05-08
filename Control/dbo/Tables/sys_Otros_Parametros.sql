@@ -12,10 +12,10 @@
     [RutaReportesFR3]               VARCHAR (50)  NULL,
     [ServerWeb]                     VARCHAR (50)  NULL,
     [RegimenFiscal]                 VARCHAR (200) NULL,
-    [idSucursal]                    INT           NOT NULL,
+    [id_Sucursal]                    INT           NOT NULL,
     [NombreReportePDFVUsadoACuenta] VARCHAR (50)  NULL,
     [TimbradoPrueba]                VARCHAR (6)   NULL,
     [VigenciaCer]                   VARCHAR (10)  NULL,
-    CONSTRAINT [FK_sys_Otros_Parametros_Sucursal] FOREIGN KEY ([idSucursal]) REFERENCES [dbo].[sys_Sucursal] ([idSucursal])
+    CONSTRAINT [FK_sys_Otros_Parametros_Sucursal] FOREIGN KEY ([id_Sucursal]) REFERENCES [dbo].[sys_Sucursal] ([id_Sucursal])
 );
 

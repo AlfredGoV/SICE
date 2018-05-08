@@ -12,7 +12,7 @@ GO
 -- =============================================
 -- Author:		<ALFREDO PEDRAZA>
 -- Create date: <07 DE JUNIO DE 2013>
--- Description:	<Para guardar un historial de USUARIOS firmados en el VDealer>
+-- Description:	<Para guardar un historial de UsuarioS firmados en el VDealer>
 -- =============================================
 
 create TRIGGER [dbo].[CMtrg_sys_Usuarios_Firmados] 

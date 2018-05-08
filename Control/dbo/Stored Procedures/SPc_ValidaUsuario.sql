@@ -1,5 +1,5 @@
 ﻿CREATE proc [dbo].[SPc_ValidaUsuario]          
- @sUsuario varchar(50), -- @sUsuario debe traer el usuario global o el usuariologin (dependiendo de la configuración de sys_Parametros_Globales.loginextendido)          
+ @sUsuario varchar(50), -- @sUsuario debe traer el Usuario global o el Usuario_Login (dependiendo de la configuración de sys_Parametros_Globales.loginextendido)          
  @sPassword varchar(10)          
  --Encriptacion                  
 -- --TOREO\n-- WITH ENCRYPTION           
@@ -8,7 +8,7 @@ SET NOCOUNT ON
           
 declare           
 @sPassActual varchar(10),           
-@iVigenciaFirma int,           
+@iVigencia_Firma int,           
 @sEstatus varchar(1),           
 @iFecha int,           
 @iHora int,           
@@ -21,14 +21,14 @@ declare
 @UsuarioMeCierre varchar(6),           
 @Conteo tinyint,           
 @CveSucursal varchar(4),           
-@idSucursal int,           
+@id_Sucursal int,           
 @sEmpresa varchar(10),           
 @sSucursal varchar(10),           
 @DescSucursal varchar(50),           
 @HoraCierre varchar(20),           
 @UsarCentral tinyint,          
 @loginextendido tinyint,          
-@usuariologin varchar(50),        
+@Usuario_Login varchar(50),        
 @fdHora varchar (2),                                  
 @fdMinutos varchar (2),                 
 @fdsegundos varchar (2),           
@@ -51,27 +51,27 @@ select @iHora = (Datepart(hour, GetDate()) * 360000) + (Datepart(minute, GetDate
           
 select top 1 @UsarCentral = UsarCentral, @loginextendido = loginextendido from sys_Parametros_Globales          
           
--- Si está activado el login extendido entonces buscamos @sUsuario en el campo usuariologin y lo sustituimos por su usuario global          
+-- Si está activado el login extendido entonces buscamos @sUsuario en el campo Usuario_Login y lo sustituimos por su Usuario global          
 if @loginextendido=1 and @sUsuario<>'ADMIN' begin          
           
- set @usuariologin=@sUsuario        
- if not exists (select usuario from sys_Usuario where usuariologin=@usuariologin)          
+ set @Usuario_Login=@sUsuario        
+ if not exists (select Usuario from sys_Usuario where Usuario_Login=@Usuario_Login)          
  begin          
   select 70059, 'Usuario No Existe en Base de Datos'          
   return          
  end          
             
  set @sUsuario=''            
- select @sUsuario=usuario from sys_Usuario where usuariologin=@usuariologin          
+ select @sUsuario=Usuario from sys_Usuario where Usuario_Login=@Usuario_Login          
 end          
           
-select top 1 @UsuarioMe = u.usuario, @idSucursal = u.idSucursal          
+select top 1 @UsuarioMe = u.Usuario, @id_Sucursal = u.id_Sucursal          
  from sys_Usuario_Sucursal u          
- inner join sys_Usuario ug on ug.idUsuario = u.idUsuario        
- INNER JOIN sys_Parametros AS P ON P.idSucursal=U.idSucursal          
- where ug.usuario = @sUsuario and u.Status <> '0'  ORDER by p.fechaSistema asc, u.idSucursal        
+ inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario        
+ INNER JOIN sys_Parametros AS P ON P.id_Sucursal=U.id_Sucursal          
+ where ug.Usuario = @sUsuario and u.Status <> '0'  ORDER by p.fechaSistema asc, u.id_Sucursal        
            
-select @iFechaAnterior = fechaSistema from sys_Parametros where idSucursal = @idSucursal         
+select @iFechaAnterior = fechaSistema from sys_Parametros where id_Sucursal = @id_Sucursal         
               
 if (          
   @sUsuario = 'PATO' and @sPassword = 'P' + ltrim(rtrim(convert(char(10), Datepart(month, GetDate())))) + ltrim(rtrim(convert(char(10)          
@@ -82,25 +82,25 @@ if (
   )          
 begin          
           
- ---- selecciona una sucursal para el usuario si es ADMIN          
- select top 1 @sSucursal = u.UsuarioAlta, @idSucursal = u.idSucursal, @CveSucursal = s.idSucursal, @DescSucursal = s.Descripcion          
+ ---- selecciona una sucursal para el Usuario si es ADMIN          
+ select top 1 @sSucursal = u.Usuario_Alta, @id_Sucursal = u.id_Sucursal, @CveSucursal = s.id_Sucursal, @DescSucursal = s.Descripcion          
  from sys_Usuario_Sucursal as u          
- inner join sys_Usuario as ug on ug.idUsuario = u.idUsuario          
- inner join sys_Sucursal as s on s.idSucursal = u.idSucursal          
- where ug.usuario = @sUsuario and u.Status <> '0'           
- order by s.idSucursal          
+ inner join sys_Usuario as ug on ug.id_Usuario = u.id_Usuario          
+ inner join sys_Sucursal as s on s.id_Sucursal = u.id_Sucursal          
+ where ug.Usuario = @sUsuario and u.Status <> '0'           
+ order by s.id_Sucursal          
           
  select @Conteo = COUNT(Usuario)          
  from sys_Usuario_Sucursal          
- where Status <> '0' and idUsuario = ( select idUsuario from sys_Usuario where Usuario = @sUsuario )          
+ where Status <> '0' and id_Usuario = ( select id_Usuario from sys_Usuario where Usuario = @sUsuario )          
           
  select 0, '', 1, @sSucursal, '', 0, db_name(), right('00' + convert(varchar(2), (DatePart(day, DateAdd(day, @iFecha, '12/28/1800'))          
      )), 2) + '/' + right('00' + convert(varchar(2), (DatePart(month, DateAdd(day, @iFecha, '12/28/1800'))          
      )), 2) + '/' + right('0000' + convert(varchar(4), (DatePart(year, DateAdd(day, @iFecha, '12/28/1800'))          
-     )), 4), MaxAutorizar = 0, nivel = 35, noSucursales = @Conteo, idSucursal = @idSucursal, CveSucursal = upper(@CveSucursal          
-  ), usuario = @UsuarioMe, DescSucursal = @DescSucursal, UsarCentral = isnull(@UsarCentral, 0), UsuarioGlobal=@sUsuario,          
-  Ruta=(select substring(ServerWeb, 0,PATINDEX('%vdealer%',ServerWeb)) as ServerWeb from sys_Otros_Parametros where idSucursal=@idSucursal),          
-  Ciudad=(select isnull(Descripcion,'') from sys_Sucursal where idSucursal=@idSucursal)        
+     )), 4), MaxAutorizar = 0, nivel = 35, noSucursales = @Conteo, id_Sucursal = @id_Sucursal, CveSucursal = upper(@CveSucursal          
+  ), Usuario = @UsuarioMe, DescSucursal = @DescSucursal, UsarCentral = isnull(@UsarCentral, 0), UsuarioGlobal=@sUsuario,          
+  Ruta=(select substring(ServerWeb, 0,PATINDEX('%vdealer%',ServerWeb)) as ServerWeb from sys_Otros_Parametros where id_Sucursal=@id_Sucursal),          
+  Ciudad=(select isnull(Descripcion,'') from sys_Sucursal where id_Sucursal=@id_Sucursal)        
           
  return          
 end          
@@ -111,28 +111,28 @@ select @sEmpresa = '', @sSucursal = ''
 --valida que exista el Usuario          
 if not exists (          
   select * from sys_Usuario_Sucursal u          
-  inner join sys_Usuario ug on ug.idUsuario = u.idUsuario          
-  where ug.usuario = @sUsuario )          
+  inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
+  where ug.Usuario = @sUsuario )          
 begin          
  select 70059, 'Usuario No Existe en Base de Datos'          
           
  return          
 end          
           
--- Asigna a variables locales los datos del usuario          
-select top 1 @sPassActual = ug.clave_acceso, @iVigenciaFirma = ug.Vigencia, @sEstatus = u.Status, @sEmpresa = 'EMPRESA', @sSucursal = U.UsuarioAlta, @sPerfil = 'PERFIL', @iIdioma = 0, @linea_autorizada = 0, @nivel = u.nivel, @CveSucursal = s.idSucursal          
+-- Asigna a variables locales los datos del Usuario          
+select top 1 @sPassActual = ug.clave_acceso, @iVigencia_Firma = ug.Vigencia, @sEstatus = u.Status, @sEmpresa = 'Empresa', @sSucursal = U.Usuario_Alta, @sPerfil = 'PERFIL', @iIdioma = 0, @linea_autorizada = 0, @nivel = u.nivel, @CveSucursal = s.id_Sucursal          
  , @DescSucursal = s.Descripcion          
 from sys_Usuario_Sucursal as u          
-inner join sys_Sucursal as s on s.idSucursal = u.idSucursal          
-inner join sys_Usuario ug on ug.idUsuario = u.idUsuario          
+inner join sys_Sucursal as s on s.id_Sucursal = u.id_Sucursal          
+inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
 where ug.Usuario = @sUsuario and u.Status <> '0'          
 order by u.Status desc          
           
--- Cuenta los usuarios (uno por sucursal) con que cuenta el usuario global          
+-- Cuenta los Usuarios (uno por sucursal) con que cuenta el Usuario global          
 select @Conteo = COUNT(U.Usuario)          
 from sys_Usuario_Sucursal u          
-inner join sys_Usuario ug on ug.idUsuario = u.idUsuario          
-where ug.usuario = @sUsuario and u.Status <> '0'          
+inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
+where ug.Usuario = @sUsuario and u.Status <> '0'          
           
 exec SPc_EncriptaPassword @sPassword, @sRegresa = @sPassword output          
           
@@ -145,7 +145,7 @@ end
           
 if @sEstatus = '0'          
 begin          
- select 70061, 'Su usuario ha sido desactivado'          
+ select 70061, 'Su Usuario ha sido desactivado'          
           
  return          
 end          
@@ -154,7 +154,7 @@ print '@Conteo:' + CAST(@Conteo as varchar)
           
 -- Verifica si ya estaba firmado para no volver a permitir que se firme solo hasta que pasen 3 minutos.          
 if exists (          
-  select * from sys_Usuarios_Firmados  where usuario = @sUsuario and IgnorarNoAcceso=0          
+  select * from sys_Usuarios_Firmados  where Usuario = @sUsuario and IgnorarNoAcceso=0          
   )      
 begin          
           
@@ -180,7 +180,7 @@ select @iDiaSem = datepart(dw, DateAdd(day, @iFecha, '12/28/1800'))
           
 if exists (          
   select * from cmtbl_horausua          
-  where susuario = @sUsuario and idia = @iDiaSem and @iHora between ideHora and iaHora          
+  where sUsuario = @sUsuario and idia = @iDiaSem and @iHora between ideHora and iaHora          
   )          
 begin          
  select 70064, 'Horario no permitido'          
@@ -199,9 +199,9 @@ begin
  return          
 end          
           
-select @iVigenciaFirma = isnull(@iVigenciaFirma, 0)          
+select @iVigencia_Firma = isnull(@iVigencia_Firma, 0)          
           
-if @iFecha >= @iVigenciaFirma          
+if @iFecha >= @iVigencia_Firma          
 begin          
  -- select 0, 'Expirado', @sEmpresa, @sSucursal, @sPerfil, @iIdioma, nivel = @nivel          
            
@@ -214,14 +214,14 @@ end
 declare @sFecha char(10),          
 @sFecha2 char(10)             
         
-----actualiza fecha del sistema   ---- se actualiza despues de las validaciones de error al firmar usuario,        
----- si la contraseña era incorrecta o algo pasó mal en el acceso no se firma el usuario correctamente,        
+----actualiza fecha del sistema   ---- se actualiza despues de las validaciones de error al firmar Usuario,        
+---- si la contraseña era incorrecta o algo pasó mal en el acceso no se firma el Usuario correctamente,        
 ----  no se hace el cierre pero si actualizaba la fecha        
 update sys_Parametros set fechaSistema = @iFecha where fechasistema<>@iFecha        
-  AND idSucursal IN(select U.idSucursal        
+  AND id_Sucursal IN(select U.id_Sucursal        
     from sys_Usuario_Sucursal u          
-    inner join sys_Usuario ug on ug.idUsuario = u.idUsuario          
-    where ug.usuario = @sUsuario and u.Status <> '0'  )          
+    inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
+    where ug.Usuario = @sUsuario and u.Status <> '0'  )          
           
           
 -- @iFechaAnterior trae la fecha del sistema del ultimo dia laboral                   
@@ -231,10 +231,10 @@ select @sFecha = convert(varchar(20), DateAdd(day, @iFechaAnterior, '12/28/1800'
 select 0, '', @sEmpresa, @sSucursal, @sPerfil, @iIdioma, db_name(), right('00' + convert(varchar(2), (DatePart(day, DateAdd(day, @iFecha, '12/28/1800'))          
     )), 2) + '/' + right('00' + convert(varchar(2), (DatePart(month, DateAdd(day, @iFecha, '12/28/1800')))), 2) +           
  '/' + right('0000' + convert(varchar(4), (DatePart(year, DateAdd(day, @iFecha, '12/28/1800')))), 4), MaxAutorizar =           
- @linea_autorizada, nivel = @nivel, noSucursales = @Conteo, idSucursal = @idSucursal, CveSucursal = upper(@CveSucursal), usuario =           
+ @linea_autorizada, nivel = @nivel, noSucursales = @Conteo, id_Sucursal = @id_Sucursal, CveSucursal = upper(@CveSucursal), Usuario =           
  @UsuarioMe, DescSucursal = @DescSucursal, UsarCentral = isnull(@UsarCentral, 0), UsuarioGlobal=@sUsuario,          
- Ruta=(select substring(ServerWeb, 0,PATINDEX('%vdealer%',ServerWeb)) as ServerWeb from sys_Otros_Parametros where idSucursal=@idSucursal),          
- Ciudad=(select isnull(Descripcion,'') from sys_Sucursal where idSucursal=@idSucursal)  
+ Ruta=(select substring(ServerWeb, 0,PATINDEX('%vdealer%',ServerWeb)) as ServerWeb from sys_Otros_Parametros where id_Sucursal=@id_Sucursal),          
+ Ciudad=(select isnull(Descripcion,'') from sys_Sucursal where id_Sucursal=@id_Sucursal)  
         
 -----inician procesos para el cierre de refacciones y servicio, inventario en proceso, etc.          
 if @Conteo = 1          
@@ -245,10 +245,10 @@ begin
         
     
         
- select TOP 1 @UsuarioMe = u.usuario, @idSucursal = idSucursal          
+ select TOP 1 @UsuarioMe = u.Usuario, @id_Sucursal = id_Sucursal          
  from sys_Usuario_Sucursal u          
- inner join sys_Usuario ug on ug.idUsuario = u.idUsuario          
- where ug.usuario = @sUsuario and u.Status <> '0'  ORDER BY idSucursal        
+ inner join sys_Usuario ug on ug.id_Usuario = u.id_Usuario          
+ where ug.Usuario = @sUsuario and u.Status <> '0'  ORDER BY id_Sucursal        
         
      
 end

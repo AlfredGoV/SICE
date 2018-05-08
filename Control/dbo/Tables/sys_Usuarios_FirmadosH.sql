@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[sys_Usuarios_FirmadosH] (
-    [AuditID]    BIGINT        IDENTITY (1, 1) NOT NULL,
+    [id_Audit]    BIGINT        IDENTITY (1, 1) NOT NULL,
     [Type]       CHAR (1)      NULL,
     [UpdateDate] DATETIME      CONSTRAINT [DF_sys_Usuarios_FirmadosH_UpdateDate] DEFAULT (getdate()) NULL,
     [UserName]   VARCHAR (128) CONSTRAINT [DF_sys_Usuarios_FirmadosH_UserName] DEFAULT (suser_sname()) NULL,
